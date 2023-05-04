@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>DiffScene</title>
+  <link rel="icon" type="image/png" href="./images/safebench.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css" />
+  <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.foundation.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.foundation.min.js"></script>
+  
+  <link rel="stylesheet" href="./files/font-awesome.min.css">
+  <link rel="stylesheet" href="./css/main.css" />
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+  <style>
+    /* latin */
+    @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* latin */
+    @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-expand-md">
+      <div class="container">
+        <a class="navbar-brand" href="./index.html"
+          >DiffScene</a>
+        <button
+          class="navbar-toggler navbar-light"
+          type="button"
+          data-toggle="collapse"
+          data-target="#main-navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-navigation">
+          <ul class="navbar-nav">
+            <li><a class="nav-link" href="./index.html">Home</a></li>
+<!--            <li><a class="nav-link" href="https://github.com/trust-ai/SafeBench">Code</a></li>-->
+<!--            <li><a class="nav-link" href="https://safebench.readthedocs.io/en/latest/">Documentation</a></li>-->
+<!--            <li><a class="nav-link" href="./scenarios.html">Scenarios</a></li>-->
+<!--            <li><a class="nav-link" href="https://arxiv.org/abs/2206.09682">Paper</a></li>-->
+          </ul>
+        </div>
+      </div>
+  </nav>
+
+
+  <!-- <hr class="toprule" /> -->
+  <header>
+    <br>
+    <br>
+    <br>
+    <div class="header-block container">
+      <div class="logo"></div>
+      <div class="title">DiffScene</div>
+      <div class="description">Guided Diffusion Models for Safety-Critical Scenario Generation</div>
+    </div>
+    <br>
+    <br>
+  </header>
+  <!-- <hr class="toprule" /> -->
+
+  <div class="container">
+    <section id="introduction">
+      <div class="overview">
+        <img src="images/pipeline.png">
+        <br><br>
+        <p class="doublealign">
+          Autonomous Driving (AD) has witnessed substantial development during the past few years.
+          One of the most critical challenges is the safety evaluation of autonomous vehicles (AVs),
+          which is extremely expensive and inefficient since it usually requires hundreds of millions of driving miles
+          due to the high dimensional nature of driving scenarios and the rareness of safety-critical scenarios in the real world.
+          In this paper, we aim to generate high-quality safety-critical scenarios which are both realistic and
+          safety-critical for AV evaluation efficiently. In particular, we propose a guided diffusion-based generation framework DiffScene,
+          leveraging the powerful generation capability of diffusion models.
+          Concretely, we design several adversarial optimization processes to guide the diffusion generation under certain adversarial budgets.
+          We conduct extensive experiments to verify that compared with SOTA baselines, scenarios generated by DiffScene
+          are (1) more safety-critical under 3 metrics, (2) more realistic under 5 distance functions, and (3) more transferable across different AD algorithms.
+          In addition, we demonstrate that DiffScene enables higher AD performance by training with its generated scenarios.
+        </p>
+      </div>
+    </section>
+
+  <div id="leaderboard" class="container button-list">
+    <div class="heading"><u>Generated Scenarios</u></div>
+  </div>
+  <p class="doublealign">
+    Scenario 1 (Crossing Negotiation, multi-agent): the ego vehicle meets a crossing SV when passing an intersection with no traffic lights.
+    The ego vehicle should negotiate with the SV to cross the unsignalized intersection.
+  </p>
+  <center>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_1_route_3_diffuse_o3_multiple_32.mp4" type="video/mp4">
+    </video>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_1_route_4_diffuse_o3_multiple_41.mp4" type="video/mp4">
+    </video>
+  </center>
+    <br>
+  <p class="doublealign">
+    Scenario 2 (Red-light Running): a crossing SV runs a red light while the ego vehicle is going straight at an
+    intersection. Collision avoidance actions must be taken to keep safe.
+  </p>
+  <center>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_2_route_4_diffuse_o3_41.mp4" type="video/mp4">
+    </video>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_2_route_9_diffuse_o3_90.mp4" type="video/mp4">
+    </video>
+  </center>
+    <br>
+  <p class="doublealign">
+    Scenario 3 (Right-turn): the ego vehicle is performing a right turn at an intersection, with a crossing SV in front.
+    The ego vehicle should take action to avoid collisions.
+  </p>
+  <center>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_3_route_2_diffuse_o3_220.mp4" type="video/mp4">
+    </video>
+    <video poster="" id="" autoplay="" controls="" muted="" loop="" width="80%">
+      <source src="./videos/scenario_3_route_6_diffuse_o3_260.mp4" type="video/mp4">
+    </video>
+  </center>
+
+  <footer>
+    <br>
+    DiffScene Team &copy; 2023
+    <br>
+    <br>
+  </footer>
+
+  <script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function () {
+      myFunction();
+    };
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
+  <script>
+    function choice() {
+      var scenario = document.getElementById("scenario").value;
+      var route = document.getElementById("route").value;
+      var ga = document.getElementById("generation-algorithm").value;
+      window.location.href = "#"+scenario+"_"+route+"_"+ga+"_heading";
+    }
+  </script>
+</body>
